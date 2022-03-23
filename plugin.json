@@ -1,0 +1,9 @@
+{
+    "name": "Code Highlighter",
+    "namespace": "Botble\\CodeHighlighter\\",
+    "provider": "Botble\\CodeHighlighter\\Providers\\CodeHighlighterServiceProvider",
+    "author": "Botble Technologies",
+    "url": "https://botble.com",
+    "version": "1.0",
+    "description": "Code syntax highlighter"
+}
