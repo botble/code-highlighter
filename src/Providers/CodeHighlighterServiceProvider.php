@@ -29,7 +29,6 @@ class CodeHighlighterServiceProvider extends ServiceProvider
         $this
             ->loadRoutes()
             ->publishAssets()
-            ->loadAndPublishViews()
             ->loadRoutes()
             ->loadAndPublishConfigurations(['permissions'])
             ->loadAndPublishTranslations();
