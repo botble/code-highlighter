@@ -13,12 +13,6 @@ https://botble.com/the-best-way-to-install-our-script-on-a-shared-hosting
 
 # How to use
 From editor, use "Insert code block" button and select coding language to insert code block.
-  
-![Screenshot](https://live.staticflickr.com/65535/51956222710_5c1a82fcff_b.jpg)
-
-# Screenshots
-
-![Screenshot](https://live.staticflickr.com/65535/51956219890_2fc5520d48_b.jpg)
 
 # Contact us
 - Website: [https://botble.com](https://botble.com)

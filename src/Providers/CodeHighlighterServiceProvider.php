@@ -2,30 +2,55 @@
 
 namespace Botble\CodeHighlighter\Providers;
 
-use Illuminate\Support\ServiceProvider;
+use Botble\Base\Facades\PanelSectionManager;
+use Botble\Base\PanelSections\PanelSectionItem;
 use Botble\Base\Traits\LoadAndPublishDataTrait;
-use Theme;
+use Botble\CodeHighlighter\CodeHighlighter;
+use Botble\Setting\PanelSections\SettingOthersPanelSection;
+use Illuminate\Support\ServiceProvider;
 
 class CodeHighlighterServiceProvider extends ServiceProvider
 {
     use LoadAndPublishDataTrait;
 
-    public function register()
+    public function register(): void
     {
         $this->setNamespace('plugins/code-highlighter');
+
+        $this->app->instance('registered.plugins.code-highlighter', false);
     }
 
-    public function boot()
+    public function boot(): void
     {
-        $this->publishAssets();
+        if (! defined('BASE_ACTION_PUBLIC_RENDER_SINGLE') || ! defined('THEME_FRONT_FOOTER')) {
+            return;
+        }
+
+        $this
+            ->loadRoutes()
+            ->publishAssets()
+            ->loadRoutes()
+            ->loadAndPublishConfigurations(['permissions'])
+            ->loadAndPublishTranslations();
+
+        PanelSectionManager::default()->beforeRendering(function () {
+            PanelSectionManager::registerItem(
+                SettingOthersPanelSection::class,
+                fn () => PanelSectionItem::make('code-highlighter')
+                    ->setTitle(trans('plugins/code-highlighter::code-highlighter.settings.title'))
+                    ->withDescription(trans('plugins/code-highlighter::code-highlighter.settings.description'))
+                    ->withIcon('ti ti-file-code')
+                    ->withPriority(9999)
+                    ->withRoute('code-highlighter.settings')
+            );
+        });
 
         add_action(BASE_ACTION_PUBLIC_RENDER_SINGLE, function () {
-            Theme::asset()
-                ->add('highlight-css', 'vendor/core/plugins/code-highlighter/libraries/highlight/highlight.min.css');
-            Theme::asset()->container('footer')
-                ->add('highlight-js', 'vendor/core/plugins/code-highlighter/libraries/highlight/highlight.min.js');
-            Theme::asset()->container('footer')
-                ->add('code-highlighter-js', 'vendor/core/plugins/code-highlighter/js/code-highlighter.js');
-        }, 125, 0);
+            CodeHighlighter::registerAssets();
+        }, 128, 0);
+
+        add_filter(THEME_FRONT_FOOTER, function (?string $html): string {
+            return $html . CodeHighlighter::renderInitialScript();
+        }, 128, 0);
     }
 }
