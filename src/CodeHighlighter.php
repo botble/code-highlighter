@@ -7,7 +7,8 @@ use Illuminate\Support\Str;
 
 class CodeHighlighter
 {
-    protected static array $supportedLanguages = ['1c' => '1C',
+    protected static array $supportedLanguages = [
+        '1c' => '1C',
         'abnf' => 'ABNF',
         'accesslog' => 'Access Log',
         'actionscript' => 'ActionScript',
@@ -201,41 +202,7 @@ class CodeHighlighter
         'zephir' => 'Zephir',
     ];
 
-    protected static array $defaultLanguages = [
-        'bash',
-        'c',
-        'cpp',
-        'csharp',
-        'css',
-        'diff',
-        'go',
-        'graphql',
-        'ini',
-        'java',
-        'javascript',
-        'json',
-        'kotlin',
-        'less',
-        'lua',
-        'makefile',
-        'markdown',
-        'objectivec',
-        'perl',
-        'php-template',
-        'php',
-        'plaintext',
-        'python-repl',
-        'python',
-        'ruby',
-        'rust',
-        'scss',
-        'shell',
-        'sql',
-        'swift',
-        'typescript',
-        'xml',
-        'yaml',
-    ];
+    protected static array $defaultLanguages = [];
 
     protected static array $supportedThemes = [
         'base16-3024' => 'Base16 3024',
