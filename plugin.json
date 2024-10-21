@@ -6,5 +6,6 @@
     "author": "Botble Technologies",
     "url": "https://botble.com",
     "version": "1.1.0",
+    "minium_core_version": "7.4.0",
     "description": "Code syntax highlighter"
 }
