@@ -534,7 +534,7 @@ class CodeHighlighter
         }
 
         return trim(<<<'HTML'
-            <script>hljs.highlightAll();</script>
+            <script>document.addEventListener('DOMContentLoaded', function () { hljs.highlightAll(); });</script>
         HTML);
     }
 
